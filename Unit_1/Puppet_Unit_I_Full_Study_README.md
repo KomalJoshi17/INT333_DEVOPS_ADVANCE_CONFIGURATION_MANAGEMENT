@@ -1,5 +1,4 @@
 
-
 # Unit I — Puppet Basics
 ## Complete Study + Practical README
 
