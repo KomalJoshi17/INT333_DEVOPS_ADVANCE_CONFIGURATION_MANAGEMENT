@@ -810,3 +810,4 @@ A: Applying the same desired configuration repeatedly should not cause unnecessa
 - [x] Facter practical
 - [x] Facter + Puppet practical
 - [x] Isolation practical
+
