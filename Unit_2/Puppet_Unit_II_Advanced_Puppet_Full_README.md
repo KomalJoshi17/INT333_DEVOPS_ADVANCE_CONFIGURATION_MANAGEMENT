@@ -3,7 +3,6 @@
 
 
 
-
 > **Course:** INT333 — DevOps / Advanced Configuration Management  
 > **Unit:** II  
 > **Topic:** Advanced Puppet  
