@@ -1009,5 +1009,4 @@ Conclusion
 
 Terraform provides a structured way to define and manage infrastructure using code. Its workflow consists of writing configuration, initializing the project, formatting and validating the configuration, planning changes, applying those changes, and maintaining state.
 
-
 The practical experiment demonstrates these concepts using the Local provider. Two local files are created through Terraform, outputs are displayed, dependencies are defined, and Terraform state is inspected using Terraform commands.
