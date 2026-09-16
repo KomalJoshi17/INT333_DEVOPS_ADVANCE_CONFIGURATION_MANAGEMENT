@@ -814,3 +814,21 @@ OK / WARNING / CRITICAL / UNKNOWN
 Web Interface
         ↓
 Alerts and Administration
+
+
+Key Exam Points
+Nagios is an open-source monitoring and alerting system.
+Nagios Core schedules and processes monitoring checks.
+Plugins perform actual monitoring operations.
+Hosts represent systems or devices.
+Services represent applications or services running on hosts.
+Nagios uses OK, WARNING, CRITICAL, and UNKNOWN states.
+Soft states represent unconfirmed problems.
+Hard states represent confirmed states.
+check_http can be used to monitor web servers.
+The Nagios web interface provides graphical monitoring information.
+Downtime is used for planned maintenance periods.
+Comments can be used to record administrative information.
+Nagios configuration defines hosts, services, commands, contacts, and other monitoring objects.
+Nagios can monitor web servers and simple web applications.
+Continuous monitoring helps detect infrastructure problems quickly.
