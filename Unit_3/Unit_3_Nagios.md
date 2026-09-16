@@ -1,129 +1,101 @@
-# Unit III — Nagios Monitoring
-
-## Overview
+Unit III — Nagios Monitoring
+Overview
 
 Nagios is an open-source monitoring system used to monitor the availability, performance, and health of IT infrastructure. It can monitor servers, network devices, applications, services, websites, and other resources.
 
 This unit covers continuous monitoring concepts, Nagios architecture and features, plugins, states, installation, configuration, web-based monitoring, command-line interfaces, and deployment of a simple web application.
 
----
-
-# 1. Continuous Monitoring Concepts
-
-## 1.1 Definition
+1. Continuous Monitoring Concepts
+1.1 Definition
 
 Continuous monitoring is the process of continuously observing IT systems, applications, servers, services, and network resources to identify failures, performance issues, and availability problems.
 
 Instead of checking systems manually, monitoring tools automatically check the status of resources and generate alerts when problems occur.
 
-### Example
+Example
 
 A monitoring system can continuously check:
 
-- Whether a web server is running
-- Whether a website is accessible
-- CPU utilization
-- Memory utilization
-- Disk space
-- Network availability
-- Database availability
-- Application services
-
----
-
-## 1.2 Importance of Continuous Monitoring
+Whether a web server is running
+Whether a website is accessible
+CPU utilization
+Memory utilization
+Disk space
+Network availability
+Database availability
+Application services
+1.2 Importance of Continuous Monitoring
 
 Continuous monitoring is important because modern applications and infrastructure need to remain available and reliable.
 
-### Major reasons
-
-1. **Early Problem Detection**
-   - Problems can be detected before they become major failures.
-
-2. **Improved Availability**
-   - Monitoring helps ensure that important services remain available.
-
-3. **Faster Troubleshooting**
-   - Alerts provide information about failed or unhealthy resources.
-
-4. **Performance Monitoring**
-   - Administrators can monitor system resources and identify performance problems.
-
-5. **Reduced Downtime**
-   - Early detection allows administrators to respond quickly.
-
-6. **Better Infrastructure Management**
-   - Monitoring provides visibility into servers, applications, and services.
-
----
-
-# 2. Introduction to Nagios
-
-## 2.1 What is Nagios?
+Major Reasons
+Early Problem Detection
+Problems can be detected before they become major failures.
+Improved Availability
+Monitoring helps ensure that important services remain available.
+Faster Troubleshooting
+Alerts provide information about failed or unhealthy resources.
+Performance Monitoring
+Administrators can monitor system resources and identify performance problems.
+Reduced Downtime
+Early detection allows administrators to respond quickly.
+Better Infrastructure Management
+Monitoring provides visibility into servers, applications, and services.
+2. Introduction to Nagios
+2.1 What is Nagios?
 
 Nagios is an open-source monitoring and alerting system.
 
 It can monitor:
 
-- Hosts
-- Servers
-- Network devices
-- Applications
-- Web servers
-- Network services
-- System resources
+Hosts
+Servers
+Network devices
+Applications
+Web servers
+Network services
+System resources
 
 Nagios performs checks at regular intervals and reports the status of monitored resources.
 
----
-
-## 2.2 Features of Nagios
+2.2 Features of Nagios
 
 Important features include:
 
-- Host monitoring
-- Service monitoring
-- Network monitoring
-- Application monitoring
-- Alerting
-- Event handling
-- Web-based monitoring interface
-- Plugin-based architecture
-- Notification support
-- Performance monitoring
-- Downtime scheduling
-- Comment management
-- Custom monitoring checks
-
----
-
-# 3. Nagios Architecture
+Host monitoring
+Service monitoring
+Network monitoring
+Application monitoring
+Alerting
+Event handling
+Web-based monitoring interface
+Plugin-based architecture
+Notification support
+Performance monitoring
+Downtime scheduling
+Comment management
+Custom monitoring checks
+3. Nagios Architecture
 
 Nagios uses a modular architecture.
 
-The major components include:
-
-```text
                  +-------------------+
                  |   Nagios Server   |
                  +---------+---------+
                            |
              +-------------+-------------+
              |                           |
-       Configuration                 Scheduler
+       Configuration                Scheduler
              |                           |
              +-------------+-------------+
                            |
-                       Plugins
+                        Plugins
                            |
           +----------------+----------------+
           |                |                |
-       Servers          Services        Devices
+       Servers          Services         Devices
           |                |                |
-       HTTP/SSH         HTTP/DNS        Network
-
-
-Main Components
+       HTTP/SSH        HTTP/DNS        Network
 3.1 Nagios Core
 
 Nagios Core is responsible for:
@@ -181,7 +153,6 @@ Problems
 Downtimes
 Comments
 Monitoring information
-
 4. Nagios Plugins
 
 Plugins are programs used by Nagios to perform monitoring checks.
@@ -410,26 +381,15 @@ The web interface provides information about monitored infrastructure.
 
 Nagios can also be managed and tested through the command line.
 
-Useful commands include:
-
+Validate Configuration
 nagios -v /usr/local/nagios/etc/nagios.cfg
-
-This checks the Nagios configuration.
-
-To check the service:
-
+Check Nagios Service
 sudo systemctl status nagios
-
-To start Nagios:
-
+Start Nagios
 sudo systemctl start nagios
-
-To restart Nagios:
-
+Restart Nagios
 sudo systemctl restart nagios
-
-To enable Nagios at startup:
-
+Enable Nagios at Startup
 sudo systemctl enable nagios
 14. Nagios Configuration
 
@@ -547,15 +507,15 @@ The Services section displays the status of individual services.
 
 Example:
 
-Service        Status
+Service       Status
 -------------------------
-HTTP           OK
-SSH            OK
-DNS            OK
+HTTP          OK
+SSH           OK
+DNS           OK
 
 If a service fails:
 
-HTTP           CRITICAL
+HTTP          CRITICAL
 
 Nagios can then generate a notification according to its configuration.
 
@@ -566,6 +526,7 @@ Downtime allows administrators to tell Nagios that a planned maintenance period 
 Example:
 
 Web Server Maintenance
+
 Start: 10:00 PM
 End:   11:00 PM
 
@@ -585,6 +546,7 @@ Administrative notes
 Example:
 
 Comment:
+
 Web server is undergoing planned maintenance.
 24. Information in the Web Interface
 
@@ -678,30 +640,30 @@ Nagios can then continuously check the web server.
 The complete monitoring flow can be represented as:
 
                 Nagios Core
-                    |
-                    |
+                     |
+                     |
               Schedule Check
-                    |
-                    v
-              check_http
-                    |
-                    v
-              Web Server
-                    |
-          +---------+---------+
-          |                   |
-        HTTP OK          HTTP Failure
-          |                   |
-          v                   v
-        OK State          CRITICAL State
-          |                   |
-          +---------+---------+
-                    |
-                    v
-              Web Interface
-                    |
-                    v
-              Administrator
+                     |
+                     v
+                check_http
+                     |
+                     v
+                Web Server
+                     |
+             +-------+-------+
+             |               |
+          HTTP OK       HTTP Failure
+             |               |
+             v               v
+          OK State      CRITICAL State
+             |               |
+             +-------+-------+
+                     |
+                     v
+                Web Interface
+                     |
+                     v
+                Administrator
 30. Complete Unit III Revision Summary
 Continuous Monitoring
 
@@ -776,7 +738,7 @@ Simple Web Application
 A basic web application can be deployed using Apache and monitored by Nagios.
 
 Unit III — Important Commands
-Update package information
+Update Package Information
 sudo apt update
 Install Apache
 sudo apt install apache2
@@ -786,36 +748,34 @@ Check Apache
 sudo systemctl status apache2
 Enable Apache
 sudo systemctl enable apache2
-Validate Nagios configuration
+Validate Nagios Configuration
 nagios -v /usr/local/nagios/etc/nagios.cfg
-Check Nagios service
+Check Nagios Service
 sudo systemctl status nagios
 Start Nagios
 sudo systemctl start nagios
 Restart Nagios
 sudo systemctl restart nagios
-Test HTTP monitoring
+Test HTTP Monitoring
 /usr/local/nagios/libexec/check_http -H localhost
 Quick Revision
 Continuous Monitoring
         ↓
-Nagios
+      Nagios
         ↓
-Nagios Core
+   Nagios Core
         ↓
-Plugins
+     Plugins
         ↓
-Hosts + Services
+ Hosts + Services
         ↓
-Monitoring Checks
+ Monitoring Checks
         ↓
 OK / WARNING / CRITICAL / UNKNOWN
         ↓
-Web Interface
+  Web Interface
         ↓
 Alerts and Administration
-
-
 Key Exam Points
 Nagios is an open-source monitoring and alerting system.
 Nagios Core schedules and processes monitoring checks.
