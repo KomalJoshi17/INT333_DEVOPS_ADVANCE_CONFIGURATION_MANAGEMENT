@@ -121,3 +121,63 @@ The major components include:
        Servers          Services        Devices
           |                |                |
        HTTP/SSH         HTTP/DNS        Network
+
+
+Main Components
+3.1 Nagios Core
+
+Nagios Core is responsible for:
+
+Scheduling checks
+Processing monitoring results
+Handling events
+Generating notifications
+Managing hosts and services
+3.2 Configuration Files
+
+Nagios configuration files define:
+
+Hosts
+Services
+Commands
+Contacts
+Contact groups
+Time periods
+Host groups
+Service groups
+3.3 Plugins
+
+Plugins perform the actual checks.
+
+Examples:
+
+check_ping
+check_http
+check_ssh
+check_dns
+check_disk
+check_load
+
+The Nagios Core schedules a check and the plugin performs the check.
+
+3.4 Notifications
+
+Nagios can notify administrators when a monitored resource changes state.
+
+Notifications may be generated for:
+
+Host failures
+Service failures
+Recovery
+Warning conditions
+Critical conditions
+3.5 Web Interface
+
+The Nagios web interface provides a graphical view of:
+
+Hosts
+Services
+Problems
+Downtimes
+Comments
+Monitoring information
