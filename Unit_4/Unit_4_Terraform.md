@@ -89,3 +89,67 @@ terraform {
 }
 
 provider "local" {}
+
+5. Terraform Required Providers
+
+The required_providers block specifies the providers required by a Terraform configuration.
+
+Example:
+
+terraform {
+  required_providers {
+    local = {
+      source  = "hashicorp/local"
+      version = "~> 2.5"
+    }
+  }
+}
+Important
+
+The correct block name is:
+
+required_providers
+
+and not:
+
+requiredproviders
+
+Using the incorrect block name results in an error such as:
+
+Unsupported block type
+Did you mean "required_providers"?
+6. Terraform Provider Block
+
+A provider block configures the provider.
+
+Example:
+
+provider "local" {}
+
+For the Local provider, no additional configuration is required.
+
+7. Terraform Resources
+
+Resources represent infrastructure objects managed by Terraform.
+
+Example:
+
+resource "local_file" "profile" {
+  filename = "student_profile.txt"
+
+  content = "Student Name: ${var.student_name}\nThis profile is created by Terraform."
+}
+
+Here:
+
+local_file
+
+is the resource type.
+
+profile
+
+is the resource name.
+
+The complete resource address is:
+
+local_file.profile
