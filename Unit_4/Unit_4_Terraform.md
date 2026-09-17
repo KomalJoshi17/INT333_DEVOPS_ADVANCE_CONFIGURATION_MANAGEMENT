@@ -239,3 +239,72 @@ The:
 depends_on
 
 argument explicitly tells Terraform that the summary resource depends on the profile resource.
+
+13. Terraform Initialization
+
+Before using most Terraform commands, the working directory must be initialized.
+
+Command:
+
+terraform init
+
+Terraform initialization performs tasks such as:
+
+Initializing the working directory
+Downloading required providers
+Preparing the backend
+Preparing the Terraform environment
+
+Example:
+
+terraform init
+
+Successful initialization generally produces output indicating that Terraform has been initialized.
+
+14. Terraform Format
+
+Terraform provides a formatting command.
+
+terraform fmt
+
+This formats Terraform configuration files according to Terraform's standard formatting style.
+
+Example:
+
+terraform fmt
+15. Terraform Validate
+
+The terraform validate command checks whether the configuration is syntactically and structurally valid.
+
+Command:
+
+terraform validate
+
+A valid configuration can produce:
+
+Success! The configuration is valid.
+
+If the required provider has not been installed, Terraform may report:
+
+Missing required provider
+
+In that situation, initialize the directory:
+
+terraform init
+
+and then run:
+
+terraform validate
+16. Terraform Plan
+
+The terraform plan command shows what Terraform intends to do.
+
+Command:
+
+terraform plan
+
+Example:
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+The plan allows changes to be reviewed before applying them.
