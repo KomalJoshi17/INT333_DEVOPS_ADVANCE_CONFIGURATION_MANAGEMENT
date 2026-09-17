@@ -465,3 +465,79 @@ terraform output
 terraform state
         ↓
 terraform destroy
+
+25. Practical Experiment — Terraform State Demo
+Objective
+
+To create and manage local files using Terraform and understand Terraform state, resources, variables, outputs, and dependencies.
+
+25.1 Create the Project Directory
+
+Example:
+
+mkdir -p ~/terraform-lab/terraform-state-demo
+
+Move into the directory:
+
+cd ~/terraform-lab/terraform-state-demo
+26. Create main.tf
+
+Create the Terraform configuration:
+
+nano main.tf
+
+Use the following configuration:
+
+terraform {
+  required_providers {
+    local = {
+      source  = "hashicorp/local"
+      version = "~> 2.5"
+    }
+  }
+}
+
+provider "local" {}
+
+variable "student_name" {
+  default = "Student"
+}
+
+resource "local_file" "profile" {
+  filename = "student_profile.txt"
+
+  content = "Student Name: ${var.student_name}\nThis profile is created by Terraform."
+}
+
+resource "local_file" "summary" {
+  filename = "deployment_summary.txt"
+
+  content = "Profile file created: ${local_file.profile.filename}\nProfile ID: ${local_file.profile.id}"
+
+  depends_on = [local_file.profile]
+}
+
+output "profile_file" {
+  value = local_file.profile.filename
+}
+
+output "summary_file" {
+  value = local_file.summary.filename
+}
+27. Initialize the Terraform Project
+
+Run:
+
+terraform init
+
+Terraform downloads the Local provider.
+
+A successful initialization allows subsequent Terraform commands to use the provider.
+
+28. Format the Configuration
+
+Run:
+
+terraform fmt
+
+This formats the configuration.
