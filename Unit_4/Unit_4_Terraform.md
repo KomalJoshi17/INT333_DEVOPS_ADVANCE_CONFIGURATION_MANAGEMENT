@@ -153,3 +153,55 @@ is the resource name.
 The complete resource address is:
 
 local_file.profile
+
+8. Terraform Variables
+
+Variables allow values to be passed into a Terraform configuration.
+
+Example:
+
+variable "student_name" {
+  default = "Student"
+}
+
+The variable can then be used with:
+
+var.student_name
+
+Example:
+
+content = "Student Name: ${var.student_name}"
+9. Terraform Outputs
+
+Outputs display useful information after Terraform operations.
+
+Example:
+
+output "profile_file" {
+  value = local_file.profile.filename
+}
+
+Another example:
+
+output "summary_file" {
+  value = local_file.summary.filename
+}
+
+After applying the configuration, the values can be displayed using:
+
+terraform output
+10. Terraform Expressions
+
+Terraform supports expressions for referencing variables and resources.
+
+Example:
+
+${var.student_name}
+
+references a variable.
+
+A resource attribute can be referenced as:
+
+local_file.profile.filename
+
+This allows one resource to use information produced by another resource.
