@@ -205,3 +205,37 @@ A resource attribute can be referenced as:
 local_file.profile.filename
 
 This allows one resource to use information produced by another resource.
+
+11. Terraform Dependencies
+
+Terraform automatically creates dependencies when one resource references another resource.
+
+For example:
+
+content = "Profile file created: ${local_file.profile.filename}"
+
+The summary resource depends on the profile resource because it references:
+
+local_file.profile.filename
+
+Terraform therefore knows that the profile file must be created before the summary file.
+
+12. Explicit Dependencies with depends_on
+
+Terraform also supports explicit dependencies.
+
+Example:
+
+resource "local_file" "summary" {
+  filename = "deployment_summary.txt"
+
+  content = "Profile file created: ${local_file.profile.filename}"
+
+  depends_on = [local_file.profile]
+}
+
+The:
+
+depends_on
+
+argument explicitly tells Terraform that the summary resource depends on the profile resource.
