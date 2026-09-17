@@ -365,3 +365,103 @@ The default local state file is:
 terraform.tfstate
 
 Terraform uses the state to understand the relationship between the configuration and the resources it manages.
+
+20. terraform.tfstate
+
+After applying the configuration, a Terraform project may contain:
+
+terraform.tfstate
+
+The state contains information Terraform uses to track managed resources.
+
+Example project:
+
+terraform-state-demo/
+│
+├── main.tf
+├── .terraform/
+├── .terraform.lock.hcl
+└── terraform.tfstate
+21. Viewing Terraform State
+
+Terraform provides commands for inspecting state.
+
+List resources:
+
+terraform state list
+
+Show information about a specific resource:
+
+terraform state show local_file.profile
+
+The state can also be examined directly as a JSON file.
+
+On Linux:
+
+cat terraform.tfstate
+
+On PowerShell:
+
+Get-Content .\terraform.tfstate
+Important
+
+Get-Content is a PowerShell command.
+
+If you are using Linux/Ubuntu, use:
+
+cat terraform.tfstate
+
+instead.
+
+22. Terraform State Commands
+List Resources
+terraform state list
+
+Example:
+
+local_file.profile
+local_file.summary
+Show a Resource
+terraform state show local_file.profile
+Pull Current State
+terraform state pull
+23. Terraform Destroy
+
+The terraform destroy command removes resources managed by Terraform.
+
+Command:
+
+terraform destroy
+
+Terraform displays the resources that will be removed and asks for confirmation.
+
+Enter:
+
+yes
+
+Terraform then destroys the resources.
+
+Example:
+
+Destroy complete! Resources: 2 destroyed.
+24. Terraform Workflow
+
+The commonly used Terraform workflow is:
+
+Write Configuration
+        ↓
+terraform init
+        ↓
+terraform fmt
+        ↓
+terraform validate
+        ↓
+terraform plan
+        ↓
+terraform apply
+        ↓
+terraform output
+        ↓
+terraform state
+        ↓
+terraform destroy
