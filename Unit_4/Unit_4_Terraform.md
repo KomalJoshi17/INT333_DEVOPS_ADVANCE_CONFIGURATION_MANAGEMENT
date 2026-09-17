@@ -541,3 +541,234 @@ Run:
 terraform fmt
 
 This formats the configuration.
+
+29. Validate the Configuration
+
+Run:
+
+terraform validate
+
+Expected result:
+
+Success! The configuration is valid.
+30. Generate Terraform Plan
+
+Run:
+
+terraform plan
+
+Terraform displays the resources that it plans to create.
+
+Expected result for the experiment:
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+The two resources are:
+
+local_file.profile
+local_file.summary
+31. Apply the Configuration
+
+Run:
+
+terraform apply
+
+When prompted:
+
+Do you want to perform these actions?
+
+Enter:
+
+yes
+
+Terraform creates:
+
+student_profile.txt
+deployment_summary.txt
+
+Expected result:
+
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+32. Check Terraform Outputs
+
+Run:
+
+terraform output
+
+Expected result:
+
+profile_file = "student_profile.txt"
+summary_file = "deployment_summary.txt"
+33. Check Created Files
+
+Run:
+
+ls
+
+Expected files include:
+
+main.tf
+student_profile.txt
+deployment_summary.txt
+terraform.tfstate
+
+Additional Terraform files/directories may also be present.
+
+34. View Student Profile
+
+Run:
+
+cat student_profile.txt
+
+Expected content:
+
+Student Name: Student
+This profile is created by Terraform.
+35. View Deployment Summary
+
+Run:
+
+cat deployment_summary.txt
+
+The file contains information about the profile file and its Terraform-generated resource ID.
+
+Example structure:
+
+Profile file created: student_profile.txt
+Profile ID: <resource-id>
+36. Inspect Terraform State
+
+Run:
+
+terraform state list
+
+Expected result:
+
+local_file.profile
+local_file.summary
+37. Inspect Profile Resource
+
+Run:
+
+terraform state show local_file.profile
+
+Terraform displays details about the managed local file.
+
+Information can include:
+
+Filename
+File permissions
+File content
+File ID
+Hash values
+38. Inspect Summary Resource
+
+Run:
+
+terraform state show local_file.summary
+
+This displays information about the summary file managed by Terraform.
+
+39. View State File on Linux
+
+Because the experiment was performed on Linux/Ubuntu, use:
+
+cat terraform.tfstate
+
+Do not use:
+
+Get-Content .\terraform.tfstate
+
+because Get-Content is a PowerShell command.
+
+40. Terraform State Experiment Flow
+                    main.tf
+                       |
+                       v
+                terraform init
+                       |
+                       v
+                Provider Installed
+                       |
+                       v
+                terraform fmt
+                       |
+                       v
+              terraform validate
+                       |
+                       v
+                terraform plan
+                       |
+                       v
+               terraform apply
+                       |
+              +--------+--------+
+              |                 |
+              v                 v
+       student_profile.txt  deployment_summary.txt
+              |                 |
+              +--------+--------+
+                       |
+                       v
+                terraform.tfstate
+                       |
+                       v
+                terraform output
+41. Understanding the Experiment
+
+The experiment contains two Terraform resources.
+
+Resource 1
+resource "local_file" "profile"
+
+This creates:
+
+student_profile.txt
+Resource 2
+resource "local_file" "summary"
+
+This creates:
+
+deployment_summary.txt
+
+The summary resource references:
+
+local_file.profile.filename
+
+and:
+
+local_file.profile.id
+
+Therefore, Terraform knows the relationship between the two resources.
+
+42. Resource Dependency
+
+The experiment also contains:
+
+depends_on = [local_file.profile]
+
+This explicitly establishes that:
+
+local_file.summary
+
+depends on:
+
+local_file.profile
+
+Therefore:
+
+local_file.profile
+        ↓
+local_file.summary
+43. Terraform Commands — Quick Reference
+Command	Purpose
+terraform init	Initialize Terraform project
+terraform fmt	Format configuration
+terraform validate	Validate configuration
+terraform plan	Preview changes
+terraform apply	Apply configuration
+terraform output	Display outputs
+terraform state list	List managed resources
+terraform state show	Show resource state
+terraform state pull	Read current state
+terraform destroy	Destroy managed resources
