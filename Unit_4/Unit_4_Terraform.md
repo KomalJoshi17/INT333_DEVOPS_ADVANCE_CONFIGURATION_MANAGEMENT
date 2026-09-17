@@ -772,3 +772,241 @@ terraform state list	List managed resources
 terraform state show	Show resource state
 terraform state pull	Read current state
 terraform destroy	Destroy managed resources
+
+44. Common Errors
+Error 1 — Incorrect Required Provider Block
+
+Incorrect:
+
+requiredproviders {
+
+Correct:
+
+required_providers {
+Error 2 — Missing Provider
+
+If Terraform reports:
+
+Missing required provider
+
+Run:
+
+terraform init
+
+Then:
+
+terraform validate
+Error 3 — Get-Content Not Found
+
+If Linux shows:
+
+Get-Content: command not found
+
+Use:
+
+cat terraform.tfstate
+
+Get-Content belongs to PowerShell.
+
+45. Important Terraform Concepts
+Provider
+
+A provider allows Terraform to communicate with a platform or service.
+
+Example:
+
+hashicorp/local
+Resource
+
+A resource represents something Terraform creates or manages.
+
+Example:
+
+local_file.profile
+Variable
+
+A variable allows reusable input values.
+
+Example:
+
+variable "student_name" {
+  default = "Student"
+}
+Output
+
+An output displays useful information after Terraform operations.
+
+Example:
+
+output "profile_file" {
+  value = local_file.profile.filename
+}
+State
+
+Terraform state records information about resources managed by Terraform.
+
+Default state file:
+
+terraform.tfstate
+Dependency
+
+Dependencies determine the order in which resources are created or changed.
+
+Example:
+
+depends_on = [local_file.profile]
+46. Practical Result
+
+After running:
+
+terraform apply
+
+the experiment creates two files:
+
+student_profile.txt
+deployment_summary.txt
+
+Terraform also maintains state information:
+
+terraform.tfstate
+
+Outputs can be viewed using:
+
+terraform output
+
+Expected output:
+
+profile_file = "student_profile.txt"
+summary_file = "deployment_summary.txt"
+47. Exam-Oriented Questions
+Short Questions
+Q1. What is Terraform?
+
+Terraform is an Infrastructure as Code tool used to define and manage infrastructure using configuration files.
+
+Q2. What is a provider?
+
+A provider is a plugin that allows Terraform to interact with a particular platform or service.
+
+Q3. What is a resource?
+
+A resource represents an infrastructure object managed by Terraform.
+
+Q4. What is Terraform state?
+
+Terraform state contains information Terraform uses to track resources managed by the configuration.
+
+Q5. What is terraform init?
+
+It initializes a Terraform working directory and installs required providers.
+
+Q6. What is terraform plan?
+
+It displays the changes Terraform intends to make without applying them.
+
+Q7. What is terraform apply?
+
+It applies the Terraform configuration and creates or modifies resources.
+
+Q8. What is terraform destroy?
+
+It removes resources managed by Terraform.
+
+Q9. What is depends_on?
+
+depends_on explicitly defines a dependency between Terraform resources.
+
+Q10. What is terraform.tfstate?
+
+It is the default local Terraform state file used to track managed resources.
+
+48. Important Practical Commands
+# Create project directory
+mkdir -p ~/terraform-lab/terraform-state-demo
+
+# Enter project
+cd ~/terraform-lab/terraform-state-demo
+
+# Initialize
+terraform init
+
+# Format
+terraform fmt
+
+# Validate
+terraform validate
+
+# Preview changes
+terraform plan
+
+# Apply configuration
+terraform apply
+
+# Display outputs
+terraform output
+
+# List resources
+terraform state list
+
+# Show resource details
+terraform state show local_file.profile
+
+# View state on Linux
+cat terraform.tfstate
+
+# Destroy resources
+terraform destroy
+49. Quick Revision
+Terraform
+    ↓
+Infrastructure as Code
+    ↓
+Configuration Files (.tf)
+    ↓
+Provider
+    ↓
+Resources
+    ↓
+Variables + Outputs
+    ↓
+terraform init
+    ↓
+terraform fmt
+    ↓
+terraform validate
+    ↓
+terraform plan
+    ↓
+terraform apply
+    ↓
+Terraform State
+    ↓
+terraform output
+    ↓
+terraform destroy
+50. Key Exam Points
+Terraform is an Infrastructure as Code tool.
+Terraform configurations are commonly written in HCL.
+Terraform configuration files normally use the .tf extension.
+Providers allow Terraform to interact with external platforms and services.
+Resources represent objects managed by Terraform.
+Variables allow values to be passed into Terraform configurations.
+Outputs display useful information after Terraform operations.
+terraform init initializes the working directory and installs required providers.
+terraform fmt formats Terraform configuration files.
+terraform validate validates Terraform configuration.
+terraform plan previews infrastructure changes.
+terraform apply applies the configuration.
+terraform destroy removes managed resources.
+terraform.tfstate is the default local state file.
+terraform state list lists resources stored in the state.
+terraform state show displays details about a resource.
+depends_on can be used to explicitly define resource dependencies.
+Terraform automatically detects dependencies when resources reference one another.
+The Local provider can be used to create and manage local files.
+The practical experiment creates student_profile.txt and deployment_summary.txt.
+Conclusion
+
+Terraform provides a structured way to define and manage infrastructure using code. Its workflow consists of writing configuration, initializing the project, formatting and validating the configuration, planning changes, applying those changes, and maintaining state.
+
+The practical experiment demonstrates these concepts using the Local provider. Two local files are created through Terraform, outputs are displayed, dependencies are defined, and Terraform state is inspected using Terraform commands.
