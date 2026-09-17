@@ -308,3 +308,60 @@ Example:
 Plan: 2 to add, 0 to change, 0 to destroy.
 
 The plan allows changes to be reviewed before applying them.
+
+17. Terraform Apply
+
+The terraform apply command applies the configuration.
+
+Command:
+
+terraform apply
+
+Terraform displays the proposed actions and asks for confirmation.
+
+Example:
+
+Do you want to perform these actions?
+Terraform will perform the actions described above.
+Only 'yes' will be accepted to approve.
+
+Enter a value:
+
+Enter:
+
+yes
+
+Terraform then creates or modifies the required resources.
+
+Example output:
+
+local_file.profile: Creating...
+local_file.profile: Creation complete
+
+local_file.summary: Creating...
+local_file.summary: Creation complete
+
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+18. Terraform Output
+
+After applying the configuration, outputs can be displayed with:
+
+terraform output
+
+Example:
+
+profile_file = "student_profile.txt"
+summary_file = "deployment_summary.txt"
+
+A specific output can also be requested:
+
+terraform output profile_file
+19. Terraform State
+
+Terraform state is used to keep track of resources managed by Terraform.
+
+The default local state file is:
+
+terraform.tfstate
+
+Terraform uses the state to understand the relationship between the configuration and the resources it manages.
